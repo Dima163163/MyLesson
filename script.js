@@ -1,9 +1,9 @@
-let title = "MyLesson";
-let screens = "Простые, Сложные, Интерактивные";
-let screenPrice = 99;
-let rollback = 44;
-let fullPrice = 100000;
-let adaptive = true;
+const title = "MyLesson";
+const screens = "Простые, Сложные, Интерактивные";
+const screenPrice = 99;
+const rollback = 44;
+const fullPrice = 100000;
+const adaptive = true;
 
 console.log(typeof title);
 console.log(typeof fullPrice);
