@@ -9,9 +9,9 @@ const screenPrice = +prompt("Сколько будет стоить данная
 const rollback = 44;
 
 const adaptive = confirm("Нужен ли адаптив на сайте?");
-const service1 = prompt("Какой дополнтиельный тип услуг нужен?");
+const service1 = prompt("Какой дополнтиельный тип услуги нужен?");
 const servicePrice1 = +prompt("Сколько это будет стоить?");
-const service2 = prompt("Какой дополнтиельный тип услуг нужен?");
+const service2 = prompt("Какой дополнтиельный тип услуги нужен?");
 const servicePrice2 = +prompt("Сколько это будет стоить?");
 const fullPrice = screenPrice + servicePrice1 + servicePrice2;
 const servicePercentPrice = Math.ceil(fullPrice - rollback);
