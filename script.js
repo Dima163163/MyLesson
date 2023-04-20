@@ -43,8 +43,8 @@ function getFullPrice(screenPrc, allServicePr) {
 const fullPrice = getFullPrice(screenPrice, allServicePrices);
 
 const getTitle = function (heading) {
-  let headingNew = heading.trim();
-  return headingNew[0].toUpperCase() + headingNew.slice(1).toLowerCase();
+  heading = heading.trim();
+  return heading[0].toUpperCase() + heading.slice(1).toLowerCase();
 };
 
 const getServicePercentPrices = function (fullPr, rollBk) {
