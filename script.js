@@ -1,21 +1,34 @@
 "use strict";
 
-const title = prompt("Как называется ваш проект?");
-const screens = prompt(
-  "Какие типы экранов нужно разработать?",
-  "Простые, Сложные, Интерактивные"
-);
-const screenPrice = +prompt("Сколько будет стоить данная работа?", 12000);
-const rollback = 44;
+let title;
+let screens;
+let screenPrice;
+let adaptive;
+let rollback = 10;
+let allServicePrices;
+let fullPrice;
+let servicePercentPrice;
+let service1;
+let service2;
 
-const adaptive = confirm("Нужен ли адаптив на сайте?");
-const service1 = prompt("Какой дополнтиельный тип услуги нужен?");
-const servicePrice1 = +prompt("Сколько это будет стоить?");
-const service2 = prompt("Какой дополнтиельный тип услуги нужен?");
-const servicePrice2 = +prompt("Сколько это будет стоить?");
+const isNumber = function (num) {
+  return !isNaN(parseFloat(num)) && isFinite(num);
+};
 
-const showTypeOf = function (variable) {
-  console.log(variable, typeof variable);
+const asking = function () {
+  title = prompt("Как называется ваш проект?", "Калькулятор верстки");
+  screens = prompt(
+    "Какие типы экранов нужно разработать?",
+    "Простые, Сложные, Интерактивные"
+  );
+
+  screenPrice;
+
+  do {
+    screenPrice = prompt("Сколько будет стоить данная работа?");
+  } while (!isNumber(screenPrice));
+
+  adaptive = confirm("Нужен ли адаптив на сайте?");
 };
 
 const getRollbackMessage = function (price) {
@@ -30,36 +43,69 @@ const getRollbackMessage = function (price) {
   }
 };
 
-const getAllServicePrices = function (servicepr1, servicepr2) {
-  return servicepr1 + servicepr2;
+const getAllServicePrices = function () {
+  let sum = 0;
+
+  for (let i = 0; i < 2; i++) {
+    if (i === 0) {
+      service1 = prompt("Какой дополнтиельный тип услуги нужен?");
+    } else if (i === 1) {
+      service2 = prompt("Какой дополнтиельный тип услуги нужен?");
+    }
+
+    sum;
+    do {
+      sum = prompt("Сколько это будет стоить?");
+    } while (!isNumber(sum));
+  }
+
+  return sum;
 };
 
-const allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
-
-function getFullPrice(screenPrc, allServicePr) {
-  return screenPrc + allServicePr;
-}
-
-const fullPrice = getFullPrice(screenPrice, allServicePrices);
-
-const getTitle = function (heading) {
-  heading = heading.trim();
-  return heading[0].toUpperCase() + heading.slice(1).toLowerCase();
+const showTypeOf = function (variable) {
+  console.log(variable, typeof variable);
 };
 
-const getServicePercentPrices = function (fullPr, rollBk) {
-  return fullPr - fullPr * (rollBk / 100);
+const getFullPrice = function () {
+  return +screenPrice + +allServicePrices;
 };
 
-const servicePercentPrice = getServicePercentPrices(fullPrice, rollback);
+const getTitle = function () {
+  return title.trim()[0].toUpperCase() + title.trim().slice(1).toLowerCase();
+};
+
+const getServicePercentPrices = function () {
+  return fullPrice - fullPrice * (rollback / 100);
+};
+
+asking();
+allServicePrices = getAllServicePrices();
+fullPrice = getFullPrice();
+servicePercentPrice = getServicePercentPrices();
+title = getTitle();
 
 showTypeOf(title);
 showTypeOf(screenPrice);
 showTypeOf(adaptive);
 
+console.log("typeScreeenPrice", typeof screenPrice);
+console.log("allServicePrices", typeof allServicePrices);
+console.log("allServicePrices", allServicePrices);
+
 console.log(screens);
 console.log(getRollbackMessage(fullPrice));
-console.log(allServicePrices);
-console.log(fullPrice);
-console.log(getTitle(title));
+console.log(typeof title);
+console.log(typeof screenPrice);
+console.log(typeof adaptive);
+console.log(screens.length);
 console.log(servicePercentPrice);
+
+console.log(
+  "Cтоимость верстки экранов " +
+    screenPrice +
+    " юани" +
+    " и " +
+    "Стоимость разработки сайта " +
+    fullPrice +
+    " юани"
+);
