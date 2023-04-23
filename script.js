@@ -4,12 +4,12 @@ let title;
 let screens;
 let screenPrice;
 let adaptive;
-let rollback = 10;
 let allServicePrices;
 let fullPrice;
 let servicePercentPrice;
 let service1;
 let service2;
+const rollback = 10;
 
 const isNumber = function (num) {
   return !isNaN(parseFloat(num)) && isFinite(num) && num !== null;
