@@ -24,6 +24,11 @@ const appData = {
     } while (!appData.isNumber(appData.screenPrice));
 
     appData.adaptive = confirm("Нужен ли адаптив на сайте?");
+
+    appData.allServicePrices = appData.getAllServicePrices();
+    appData.fullPrice = appData.getFullPrice();
+    appData.servicePercentPrice = appData.getServicePercentPrices();
+    appData.title = appData.getTitle();
   },
 
   isNumber: function (num) {
@@ -80,24 +85,19 @@ const appData = {
   },
 
   start: function () {
-    return appData.asking();
+    appData.asking();
   },
 
   logger: function (info) {
-    return console.log(info);
+    console.log(info);
   },
 };
+
+appData.start();
 
 for (let key in appData) {
   appData.logger(key);
 }
-
-appData.start();
-
-appData.allServicePrices = appData.getAllServicePrices();
-appData.fullPrice = appData.getFullPrice();
-appData.servicePercentPrice = appData.getServicePercentPrices();
-appData.title = appData.getTitle();
 
 console.log(appData.fullPrice);
 console.log(appData.servicePercentPrice);
