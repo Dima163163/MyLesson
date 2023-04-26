@@ -1,6 +1,5 @@
 "use strict";
 
-let rollback = 10;
 const appData = {
   title: "",
   screens: "",
@@ -88,13 +87,15 @@ const appData = {
     appData.logger();
   },
 
-  logger: function (info) {
-    console.log(info);
+  logger: function () {
+    let arr = [];
+    for (let key in appData) {
+      arr += key + ", ";
+    }
+    return arr;
   },
 };
 
 appData.start();
 
-for (let key in appData) {
-  appData.logger(key);
-}
+console.log(appData.logger());
