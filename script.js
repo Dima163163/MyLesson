@@ -11,6 +11,18 @@ const appData = {
   servicePercentPrice: 0,
   service1: "",
   service2: "",
+  start: function () {
+    appData.asking();
+    appData.allServicePrices = appData.getAllServicePrices();
+    appData.fullPrice = appData.getFullPrice();
+    appData.servicePercentPrice = appData.getServicePercentPrices();
+    appData.title = appData.getTitle();
+
+    appData.logger();
+  },
+  isNumber: function (num) {
+    return !isNaN(parseFloat(num)) && isFinite(num) && num !== null;
+  },
   asking: function () {
     appData.title = prompt("Как называется ваш проект?", "Калькулятор верстки");
     appData.screens = prompt(
@@ -23,10 +35,6 @@ const appData = {
     } while (!appData.isNumber(appData.screenPrice));
 
     appData.adaptive = confirm("Нужен ли адаптив на сайте?");
-  },
-
-  isNumber: function (num) {
-    return !isNaN(parseFloat(num)) && isFinite(num) && num !== null;
   },
 
   getRollbackMessage: function (price) {
@@ -55,7 +63,7 @@ const appData = {
 
       do {
         price = prompt("Сколько это будет стоить?");
-      } while (!appData.isNumber(sum));
+      } while (!appData.isNumber(price));
 
       sum += +price;
     }
@@ -76,15 +84,6 @@ const appData = {
 
   getServicePercentPrices: function () {
     return appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
-  },
-
-  start: function () {
-    appData.asking();
-    appData.allServicePrices = appData.getAllServicePrices();
-    appData.fullPrice = appData.getFullPrice();
-    appData.servicePercentPrice = appData.getServicePercentPrices();
-    appData.title = appData.getTitle();
-    appData.logger();
   },
 
   logger: function () {
