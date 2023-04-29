@@ -55,7 +55,7 @@ const appData = {
         price = prompt("Сколько это будет стоить?");
       } while (!appData.isNumber(price));
 
-      appData.services[name + Math.floor(Math.random() * 100)] = +price;
+      appData.services[name + i] = +price;
     }
 
     appData.adaptive = confirm("Нужен ли адаптив на сайте?");
