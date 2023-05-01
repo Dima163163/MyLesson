@@ -3,8 +3,12 @@
 //Получаем заголовок с тегом h1
 const title = document.getElementsByTagName("h1");
 
-//Получаеем кнопки рсчитать и сбросc
+//Получаеем кнопки расчитать и сбросc
 const buttons = document.getElementsByClassName("handler_btn");
+console.log(buttons);
+for (let value of buttons) {
+  console.log(value);
+}
 
 //Получаем кнопку "+"
 const screenBtn = document.querySelector(".screen-btn");
@@ -25,25 +29,22 @@ const rangeValue = document.querySelector(
 
 //Получаем все input c классом total-input
 const totalInput = document.getElementsByClassName("total-input");
+console.log(totalInput);
+
+for (let input of totalInput) {
+  console.log(input);
+}
 
 //Получаем все блоки с классом screen
 let screenBlock = document.querySelectorAll(".screen");
 
 console.log(title[0]);
-console.log(buttons);
+
 console.log(screenBtn);
 console.log(otherPersent);
 console.log(otherNumber);
 console.log(entryField);
 console.log(rangeValue);
-
-//Получем коллекцию элементов total-input
-console.log(totalInput);
-
-//Получаем все input c классом total-input
-for (let input of totalInput) {
-  console.log(input);
-}
 
 //Получаем все блоки с классом screen
 console.log(screenBlock);
