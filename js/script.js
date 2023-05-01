@@ -5,10 +5,12 @@ const title = document.getElementsByTagName("h1");
 
 //Получаеем кнопки расчитать и сбросc
 const buttons = document.getElementsByClassName("handler_btn");
+const startBtn = buttons[0];
+const resetBtn = buttons[1];
+
 console.log(buttons);
-for (let value of buttons) {
-  console.log(value);
-}
+console.log(startBtn);
+console.log(resetBtn);
 
 //Получаем кнопку "+"
 const screenBtn = document.querySelector(".screen-btn");
@@ -31,9 +33,17 @@ const rangeValue = document.querySelector(
 const totalInput = document.getElementsByClassName("total-input");
 console.log(totalInput);
 
-for (let input of totalInput) {
-  console.log(input);
-}
+let fullPrice = totalInput[0];
+let screens = totalInput[1];
+let addServices = totalInput[2];
+let total = totalInput[3];
+let priceRollback = totalInput[4];
+
+console.log(fullPrice);
+console.log(screens);
+console.log(addServices);
+console.log(total);
+console.log(priceRollback);
 
 //Получаем все блоки с классом screen
 let screenBlock = document.querySelectorAll(".screen");
