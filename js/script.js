@@ -33,6 +33,10 @@ const appData = {
   servicesNumber: {},
   init: function () {
     appData.addTitle();
+    inputRange.addEventListener("input", function () {
+      inputRangeValue.textContent = inputRange.value;
+      appData.rollback = +inputRangeValue.textContent;
+    });
     startBtn.addEventListener("click", appData.start);
     buttonPlus.addEventListener("click", appData.addScreenBlock);
   },
@@ -61,10 +65,18 @@ const appData = {
       const input = screen.querySelector("input");
       const selectName = select.options[select.selectedIndex].textContent;
 
+      if (input.value == "" || select.value == "") {
+        startBtn.disabled = true;
+        startBtn.style.backgroundColor = "grey";
+      } else {
+        startBtn.disabled = false;
+      }
+
       appData.screens.push({
         id: index,
         name: selectName,
         price: +select.value * +input.value,
+        count: +input.value,
       });
     });
     console.log(appData.screens);
@@ -113,24 +125,24 @@ const appData = {
       +appData.screenPrice +
       appData.servicePricesNumber +
       appData.servicePricesPercent;
-  },
-  getRollbackMessage: function (price) {
-    if (price > 30000) {
-      return "Даем скидку в 10%";
-    } else if (price >= 15000 && price <= 30000) {
-      return "Даем скидку в 5%";
-    } else if (price < 15000 && price >= 0) {
-      return "Скидка не предусмотрена";
-    } else if (price < 0) {
-      return "Что-то пошло не так";
-    }
-  },
-  getServicePercentPrices: function () {
+
     appData.servicePercentPrice =
       appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
+    totalCountRollback.value = appData.servicePercentPrice;
+
+    let sum = 0;
+    for (let screen of appData.screens) {
+      sum += screen.count;
+    }
+    totalCount.value = sum;
   },
+  // getServicePercentPrices: function () {
+  //   appData.servicePercentPrice =
+  //     appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
+  // },
 
   logger: function () {
+    console.log(appData);
     console.log(appData.fullPrice);
     console.log(appData.services);
     console.log(appData.servicePercentPrice);
