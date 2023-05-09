@@ -42,13 +42,15 @@ const appData = {
   },
   start: function () {
     appData.addScreens();
-    const result = appData.checkInputResult();
-    if (result) {
+    const isValid = appData.checkInputResult();
+    if (isValid) {
       appData.addServices();
       appData.addPrices();
       // appData.getServicePercentPrices();
       // appData.logger();
       appData.showResult();
+    } else {
+      alert("Ошибка.Заполните все значения");
     }
   },
   showResult: function () {
@@ -139,11 +141,28 @@ const appData = {
     appData.rollback = +inputRangeValue.textContent;
   },
   checkInputResult: function () {
-    const result = appData.screens.filter(function (screen) {
-      return screen.name !== "Тип экранов" && screen.count;
+    // const result = appData.screens.filter(function (screen) {
+    //   return screen.name !== "Тип экранов" && screen.count > 0;
+    // });
+
+    // return result.length === appData.screens.length;
+
+    let flag = true;
+    appData.screens.forEach((item) => {
+      if (item.name == "Тип экранов" || item.count <= 0) {
+        flag = false;
+      }
     });
 
-    return result.length === appData.screens.length;
+    return flag;
+
+    // let flag = true;
+    // for (let item in appData.screens) {
+    //   if (!(item.name == "Тип экранов" && item.count > 0)) {
+    //     flag = false;
+    //   }
+    // }
+    // return flag;
   },
 
   logger: function () {
