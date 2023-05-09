@@ -33,10 +33,7 @@ const appData = {
   servicesNumber: {},
   init: function () {
     appData.addTitle();
-    inputRange.addEventListener("input", function () {
-      inputRangeValue.textContent = inputRange.value;
-      appData.rollback = +inputRangeValue.textContent;
-    });
+    inputRange.addEventListener("input", appData.addRange);
     startBtn.addEventListener("click", appData.start);
     buttonPlus.addEventListener("click", appData.addScreenBlock);
   },
@@ -137,8 +134,12 @@ const appData = {
   //   appData.servicePercentPrice =
   //     appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
   // },
+  addRange: function () {
+    inputRangeValue.textContent = inputRange.value;
+    appData.rollback = +inputRangeValue.textContent;
+  },
   checkInputResult: function () {
-    const result = appData.screens.filter(function (screen, index) {
+    const result = appData.screens.filter(function (screen) {
       return screen.name !== "Тип экранов" && screen.count;
     });
 
