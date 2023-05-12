@@ -105,6 +105,7 @@ const appData = {
   },
   addScreenBlock: function () {
     const cloneScreen = screens[0].cloneNode(true);
+    cloneScreen.querySelector("input[type=text]").value = "";
     screens[screens.length - 1].after(cloneScreen);
   },
   addPrices: function () {
@@ -142,7 +143,7 @@ const appData = {
   //     appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
   // },
   addRange: function () {
-    inputRangeValue.textContent = inputRange.value;
+    inputRangeValue.textContent = `${inputRange.value}%`;
     this.rollback = +inputRangeValue.textContent;
   },
   checkInputResult: function () {
@@ -160,25 +161,20 @@ const appData = {
     });
 
     return flag;
-
-    // let flag = true;
-    // for (let item in appData.screens) {
-    //   if (!(item.name == "Тип экранов" && item.count > 0)) {
-    //     flag = false;
-    //   }
-    // }
-    // return flag;
   },
   leftInputsDisableSwitch: function () {
     const check = Array.from(document.querySelectorAll("input[type=checkbox]"));
-    const inputArr = Array.from(document.querySelectorAll("input[type=text]"));
 
-    const leftInputs = inputArr.filter(
-      (input) => !input.classList.contains("total-input")
-    );
-    leftInputs.forEach((item) => (item.disabled = !appData.inputBlocked));
+    Array.from(document.querySelectorAll(".screen")).forEach((elem) => {
+      const input = elem.querySelector("input[type=text]");
+      const select = elem.querySelector("select");
+      input.disabled = !appData.inputBlocked;
+      select.disabled = !appData.inputBlocked;
+    });
 
     check.forEach((checkbox) => (checkbox.disabled = !appData.inputBlocked));
+
+    inputRange.disabled = !appData.inputBlocked;
 
     appData.inputBlocked = !appData.inputBlocked;
   },
@@ -192,11 +188,43 @@ const appData = {
     }
   },
   resetValues: function () {
-    Array.from(allInputs).forEach((input) => {
-      console.log(input);
+    const selectsQuery = document.querySelectorAll("select");
+    const screens = document.querySelectorAll(".screen");
+
+    Array.from(selectsQuery).forEach((select) => {
+      select.value = "";
     });
-    appData.sumButtonSwitch();
+
+    screens.forEach((item, index) => {
+      if (index != 0) {
+        item.remove();
+      }
+    });
+
+    Array.from(document.querySelectorAll("input")).forEach((input) => {
+      input.value = input.defaultValue;
+
+      if (input.type === "checkbox") {
+        input.checked = false;
+      }
+    });
+
+    inputRangeValue.textContent = `${inputRange.value}%`;
+
+    appData.title = "";
+    appData.screens = [];
+    appData.screenPrice = 0;
+    appData.adaptive = true;
+    appData.rollback = 10;
+    appData.servicePricesPercent = 0;
+    appData.servicePricesNumber = 0;
+    appData.fullPrice = 0;
+    appData.servicePercentPrice = 0;
+    appData.servicesPercent = {};
+    appData.servicesNumber = {};
+
     appData.leftInputsDisableSwitch();
+    appData.sumButtonSwitch();
   },
   logger: function () {
     console.log(appData);
