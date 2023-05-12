@@ -17,6 +17,8 @@ const totalCountOther = document.getElementsByClassName("total-input")[2];
 const fullTotalCount = document.getElementsByClassName("total-input")[3];
 const totalCountRollback = document.getElementsByClassName("total-input")[4];
 
+const allInputs = document.querySelectorAll("input");
+
 let screens = document.querySelectorAll(".screen");
 
 const appData = {
@@ -31,12 +33,13 @@ const appData = {
   servicePercentPrice: 0,
   servicesPercent: {},
   servicesNumber: {},
+  inputBlocked: false,
   init: function () {
     this.addTitle();
     inputRange.addEventListener("input", this.addRange);
     startBtn.addEventListener("click", this.start);
     buttonPlus.addEventListener("click", this.addScreenBlock);
-    console.log("это init", this);
+    resetBtn.addEventListener("click", this.resetValues);
   },
   addTitle: function () {
     document.title = title.textContent;
@@ -44,12 +47,15 @@ const appData = {
   start: function () {
     appData.addScreens();
     const isValid = appData.checkInputResult();
+
     if (isValid) {
       appData.addServices();
       appData.addPrices();
       // appData.getServicePercentPrices();
       // appData.logger();
       appData.showResult();
+      appData.leftInputsDisableSwitch();
+      appData.sumButtonSwitch();
     } else {
       alert("Ошибка.Заполните все значения");
     }
@@ -163,7 +169,35 @@ const appData = {
     // }
     // return flag;
   },
+  leftInputsDisableSwitch: function () {
+    const check = Array.from(document.querySelectorAll("input[type=checkbox]"));
+    const inputArr = Array.from(document.querySelectorAll("input[type=text]"));
 
+    const leftInputs = inputArr.filter(
+      (input) => !input.classList.contains("total-input")
+    );
+    leftInputs.forEach((item) => (item.disabled = !appData.inputBlocked));
+
+    check.forEach((checkbox) => (checkbox.disabled = !appData.inputBlocked));
+
+    appData.inputBlocked = !appData.inputBlocked;
+  },
+  sumButtonSwitch: function () {
+    if (appData.inputBlocked) {
+      startBtn.style.display = "none";
+      resetBtn.style.display = "block";
+    } else {
+      startBtn.style.display = "block";
+      resetBtn.style.display = "none";
+    }
+  },
+  resetValues: function () {
+    Array.from(allInputs).forEach((input) => {
+      console.log(input);
+    });
+    appData.sumButtonSwitch();
+    appData.leftInputsDisableSwitch();
+  },
   logger: function () {
     console.log(appData);
     console.log(appData.fullPrice);
