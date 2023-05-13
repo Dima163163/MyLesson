@@ -46,7 +46,7 @@ const appData = {
   },
   start: function () {
     this.addScreens();
-    const isValid = appData.checkInputResult();
+    const isValid = this.checkInputResult();
 
     if (isValid) {
       this.addServices();
