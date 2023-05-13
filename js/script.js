@@ -168,18 +168,18 @@ const appData = {
     Array.from(document.querySelectorAll(".screen")).forEach((elem) => {
       const input = elem.querySelector("input[type=text]");
       const select = elem.querySelector("select");
-      input.disabled = !appData.inputBlocked;
-      select.disabled = !appData.inputBlocked;
+      input.disabled = !this.inputBlocked;
+      select.disabled = !this.inputBlocked;
     });
 
-    check.forEach((checkbox) => (checkbox.disabled = !appData.inputBlocked));
+    check.forEach((checkbox) => (checkbox.disabled = !this.inputBlocked));
 
-    inputRange.disabled = !appData.inputBlocked;
+    inputRange.disabled = !this.inputBlocked;
 
-    appData.inputBlocked = !appData.inputBlocked;
+    this.inputBlocked = !this.inputBlocked;
   },
   sumButtonSwitch: function () {
-    if (appData.inputBlocked) {
+    if (this.inputBlocked) {
       startBtn.style.display = "none";
       resetBtn.style.display = "block";
     } else {
@@ -211,27 +211,27 @@ const appData = {
 
     inputRangeValue.textContent = `${inputRange.value}%`;
 
-    appData.title = "";
-    appData.screens = [];
-    appData.screenPrice = 0;
-    appData.adaptive = true;
-    appData.rollback = 10;
-    appData.servicePricesPercent = 0;
-    appData.servicePricesNumber = 0;
-    appData.fullPrice = 0;
-    appData.servicePercentPrice = 0;
-    appData.servicesPercent = {};
-    appData.servicesNumber = {};
+    this.title = "";
+    this.screens = [];
+    this.screenPrice = 0;
+    this.adaptive = true;
+    this.rollback = 10;
+    this.servicePricesPercent = 0;
+    this.servicePricesNumber = 0;
+    this.fullPrice = 0;
+    this.servicePercentPrice = 0;
+    this.servicesPercent = {};
+    this.servicesNumber = {};
 
-    appData.leftInputsDisableSwitch();
-    appData.sumButtonSwitch();
+    this.leftInputsDisableSwitch();
+    this.sumButtonSwitch();
   },
   logger: function () {
-    console.log(appData);
-    console.log(appData.fullPrice);
-    console.log(appData.services);
-    console.log(appData.servicePercentPrice);
-    console.log(appData.screens);
+    console.log(this);
+    console.log(this.fullPrice);
+    console.log(this.services);
+    console.log(this.servicePercentPrice);
+    console.log(this.screens);
   },
 };
 
