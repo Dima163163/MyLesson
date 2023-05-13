@@ -36,10 +36,10 @@ const appData = {
   inputBlocked: false,
   init: function () {
     this.addTitle();
-    inputRange.addEventListener("input", this.addRange.bind(appData));
-    startBtn.addEventListener("click", this.start.bind(appData));
-    buttonPlus.addEventListener("click", this.addScreenBlock.bind(appData));
-    resetBtn.addEventListener("click", this.resetValues.bind(appData));
+    inputRange.addEventListener("input", this.addRange.bind(this));
+    startBtn.addEventListener("click", this.start.bind(this));
+    buttonPlus.addEventListener("click", this.addScreenBlock.bind(this));
+    resetBtn.addEventListener("click", this.resetValues.bind(this));
   },
   addTitle: function () {
     document.title = title.textContent;
