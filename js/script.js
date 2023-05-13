@@ -36,26 +36,26 @@ const appData = {
   inputBlocked: false,
   init: function () {
     this.addTitle();
-    inputRange.addEventListener("input", this.addRange);
-    startBtn.addEventListener("click", this.start);
-    buttonPlus.addEventListener("click", this.addScreenBlock);
-    resetBtn.addEventListener("click", this.resetValues);
+    inputRange.addEventListener("input", this.addRange.bind(appData));
+    startBtn.addEventListener("click", this.start.bind(appData));
+    buttonPlus.addEventListener("click", this.addScreenBlock.bind(appData));
+    resetBtn.addEventListener("click", this.resetValues.bind(appData));
   },
   addTitle: function () {
     document.title = title.textContent;
   },
   start: function () {
-    appData.addScreens();
+    this.addScreens();
     const isValid = appData.checkInputResult();
 
     if (isValid) {
-      appData.addServices();
-      appData.addPrices();
+      this.addServices();
+      this.addPrices();
       // appData.getServicePercentPrices();
       // appData.logger();
-      appData.showResult();
-      appData.leftInputsDisableSwitch();
-      appData.sumButtonSwitch();
+      this.showResult();
+      this.leftInputsDisableSwitch();
+      this.sumButtonSwitch();
     } else {
       alert("Ошибка.Заполните все значения");
     }
