@@ -138,21 +138,11 @@ const appData = {
     }
     totalCount.value = sum;
   },
-  // getServicePercentPrices: function () {
-  //   appData.servicePercentPrice =
-  //     appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
-  // },
   addRange: function () {
     inputRangeValue.textContent = `${inputRange.value}%`;
     this.rollback = +inputRangeValue.textContent;
   },
   checkInputResult: function () {
-    // const result = appData.screens.filter(function (screen) {
-    //   return screen.name !== "Тип экранов" && screen.count > 0;
-    // });
-
-    // return result.length === appData.screens.length;
-
     let flag = true;
     this.screens.forEach((item) => {
       if (item.name == "Тип экранов" || item.count <= 0) {
